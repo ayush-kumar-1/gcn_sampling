@@ -18,7 +18,7 @@ def main():
     baseline()
     
     # graphsaint_RandomNodeSampler()
-    dataset = Planetoid(root='../data/', name='Cora', transform=T.NormalizeFeatures())
+    dataset = Planetoid(root='../data/', name='CiteSeer', transform=T.NormalizeFeatures())
     data = dataset[0]
 
     random_loader = RandomNodeSampler(data, num_parts=10)
@@ -63,11 +63,11 @@ class GAT(torch.nn.Module):
         return F.log_softmax(x, dim=1)
 
 def baseline(): 
-    dataset = Planetoid(root='../data/', name='Cora', transform=T.NormalizeFeatures())
+    dataset = Planetoid(root='../data/', name='CiteSeer', transform=T.NormalizeFeatures())
     data = dataset[0]
     #for reproducibility 
-    #torch.manual_seed(12345)
-    #np.random.seed(12345)
+    torch.manual_seed(12345)
+    np.random.seed(12345)
 
     device = "cpu"
     model = GAT(dataset).to(device)
@@ -101,11 +101,11 @@ def baseline():
         optimizer.step()
 
 def sampling(sampling_method, method_name): 
-    dataset = Planetoid(root='../data/', name='Cora', transform=T.NormalizeFeatures())
+    dataset = Planetoid(root='../data/', name='CiteSeer', transform=T.NormalizeFeatures())
     data = dataset[0]
     #for reproducibility 
-    torch.manual_seed(12345)
-    np.random.seed(12345)
+    #torch.manual_seed(12345)
+    #np.random.seed(12345)
 
     device = "cpu"
     model = GAT(dataset).to(device)
