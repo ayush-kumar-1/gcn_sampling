@@ -3,19 +3,22 @@
 \usepackage{geometry}
 \geometry{letterpaper, total={7in, 10in} }
 
+\usepackage{listings}
 \usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{verbatim}
 \usepackage{appendix}
+\lstset{breaklines=True}
 
-\title{Evaluating Graph Sampling Methods for Graph Attention Networks}
+\title{Evaluating Graph Sampling Methods for Graph Attention Networks on Citation Networks}
 \author{Ayush Kumar, Nick Puglisi}
 \date{December 17, 2021}
 
 \begin{document}
 	\maketitle
 	\tableofcontents
+	\pagebreak
 	\section{Introduction}
 	\subsection{Motivation}
 	\subsection{Overview of Graph Attention Networks}
@@ -23,9 +26,37 @@
 	
 	\section{Testing and Evaluation}
 	\subsection{Testing Setup}
+	
+	The sampling methods were tested on three citation networks: Cora, CiteSeer, and PubMed. 
+	
 	\subsection{Results}
 	
-	\section{Conclusion}
+	Below are the results of the sampling methods, based on average testing accuracy over four trials. Comparable results have been highlighted.
+
+	\begin{table}
+		\centering
+		\begin{tabular}{c|l|l|l|}
+			\cline{2-4}
+			& \multicolumn{1}{c|}{Cora} & \multicolumn{1}{c|}{CiteSeer} & PubMed          \\ \hline
+			\multicolumn{1}{|c|}{Baseline (No Sampling)}         & \textbf{82.0\%}           & \textbf{69.9\%}               & \textbf{77.0\%} \\ \hline
+			\multicolumn{1}{|c|}{Random Node Sampler}            & 77.6\%                    & 65.2\%                        & 73.4\%          \\ \hline
+			\multicolumn{1}{|c|}{ClusterGCN}                     & \textbf{80.8\%}           & \textbf{70.7\%}               & \textbf{77.1\%} \\ \hline
+			\multicolumn{1}{|c|}{GraphSAGE}                      & 59.3\%                    & \textbf{70.9\%}               & \textbf{76.3\%} \\ \hline
+			\multicolumn{1}{|c|}{GraphSAINT Node Sampler}        & 60.9\%                    & 34.2\%                        & 26.4\%          \\ \hline
+			\multicolumn{1}{|c|}{GraphSAINT Edge Sampler}        & 70.7\%                    & 50.5\%                        & 55.7\%          \\ \hline
+			\multicolumn{1}{|c|}{GraphSAINT Random Walk Sampler} & \textbf{79.9\%}           & 68.6\%                        & 75.3\%          \\ \hline
+		\end{tabular}
+	\end{table}
+
 	
+	
+	\section{Conclusion}
+	\pagebreak
+	\appendix
+	\section{Code}
+	This is the code used to run the Cora sampling procedures. Other datasets were used by simply changing the dataset name in the initial definition. For this reason, only the Cora sampling script is included in this document. 
+	
+	\lstinputlisting[language=python]{../python/cora_sampling.py}
+
 	
 \end{document}
