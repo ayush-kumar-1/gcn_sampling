@@ -66,8 +66,8 @@ def baseline():
     dataset = Planetoid(root='../data/', name='CiteSeer', transform=T.NormalizeFeatures())
     data = dataset[0]
     #for reproducibility 
-    torch.manual_seed(12345)
-    np.random.seed(12345)
+    #torch.manual_seed(12345)
+    #np.random.seed(12345)
 
     device = "cpu"
     model = GAT(dataset).to(device)

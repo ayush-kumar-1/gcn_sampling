@@ -104,8 +104,8 @@ def sampling(sampling_method, method_name):
     dataset = Planetoid(root='../data/', name='Cora', transform=T.NormalizeFeatures())
     data = dataset[0]
     #for reproducibility 
-    torch.manual_seed(12345)
-    np.random.seed(12345)
+    #torch.manual_seed(12345)
+    #np.random.seed(12345)
 
     device = "cpu"
     model = GAT(dataset).to(device)
