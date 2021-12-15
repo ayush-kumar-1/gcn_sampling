@@ -20,11 +20,36 @@
 	\tableofcontents
 	\pagebreak
 	\section{Introduction}
+	
+	Graph Convolutional Network (GCNs) have been a great contribution to the field of network data ever since Thomas Kipf and Max Welling published the paper: Semi-Supervised Classification With Graph Convolutional Networks. The main idea behind the paper is that since graph structures do not exhibit euclidean geometry, standard convoultions that might be used for image recognition will not translate onto graph structures as well. So, through the use of Laplacian re-normalization trick presented in the GCN paper, classification accuracy	has increased in comparison to other similar methods. However, a major tenet in the field of machine learning is that there is no one best method to employ for each and every problem. So, we present an investigation into both sampling techniques combined with Graphical Attention Networks (GATs).
+
 	\subsection{Motivation}
+	
+	What sparked the investigation presented here was an observation made from the methodology in the original GCNs paper. 
+	Throughout model training, Kipf and Welling employed random dropout of nodes to introduce stochasticiy during gradient descent. However, the use of random dropout only allows
+	for updates to occur once per epoch while requiring the full data set to be loaded for every training iteration. So, some questions arose on if 
+	sampling methods could be employed over random dropout to increase efficiency when combined with the Graphical Attention Networks
+	
 	\subsection{Overview of Graph Attention Networks}
+	
+	One shortcoming of the GCNs methodology is that it assumes equal importance of neighboring nodes. While some network structures might allow for
+	an assumption like this to be made, other network structures might not allow for this assumption. So, the authors of the paper 
+	Graphical Attention Networks seek to address this by leveraging self-attentional layers to enable different weights to be assigned across a given cluster of nodes. 
+	The GATs method also used dropout to introduce stochasticiy and pushed results that successfully achieved or beat other methods of node classification, all while 
+	removing the need for equal importance.
+
 	\subsection{Overview of Graph Sampling Methods} 
 	
+	Both GCNs and GATs methodology employed the use of dropout during model training. However, as the size of a network increases,
+	it becomes much more computationally expensive to train a model, for full-batch training only allows for parameters to update once per epoch. This sharp increase in power needed for model training has thus created a need for a way to minimize both storage costs and time spent.
+	In the paper Sampling Methods for Efficient Training of Graph Convolutional Networks: A Survey, the authors compile and outline a whole host 
+	of sampling methods along with their respective algorithms that offer increases in efficiency. The methods outlined fall into two categories, namely: Layer-wise and subgraph-based sampling. One of the downsides of using sampling methods
+	is that a bias-variance trade-off will be introduced. Yet, motivated by both GATs and the sampling methods applied to GNCs, we ask: is there any gain to applying sampling to the Graphical Attention Networks?
+	
+	We will begin by selecting three different sampling methods to apply to the GATs, namely: 
+	
 	\section{Testing and Evaluation}
+	
 	\subsection{Testing Setup}
 	
 	The sampling methods were tested on three citation networks: Cora, CiteSeer, and PubMed. 
